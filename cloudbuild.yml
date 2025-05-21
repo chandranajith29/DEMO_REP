@@ -16,7 +16,7 @@ steps:
       - '-c'
       - |
         echo "Uploading files to GCS bucket..."
-        gsutil -m cp -r repo/<gcs_to_bq_and_bq_operators.py> ${_BUCKET_PATH}
+        gsutil -m cp -r repo/gcs_to_bq_and_bq_operators.py ${_BUCKET_PATH}
         echo "Upload complete."
 
 substitutions:
