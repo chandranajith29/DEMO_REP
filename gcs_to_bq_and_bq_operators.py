@@ -12,7 +12,7 @@ yesterday = datetime.combine(datetime.today() - timedelta(1), datetime.min.time(
 
 # Default arguments
 default_args = {
-    'start_date':today,
+    'start_date':yesterday,
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
