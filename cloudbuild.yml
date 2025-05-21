@@ -5,7 +5,7 @@ steps:
     args:
       - '-c'
       - |
-        git clone https://github.com/<your-org-or-username>/<your-repo>.git repo
+        git clone https://github.com/chandranajith29/DEMO_REP.git repo
         cd repo
         echo "Repository cloned successfully."
 
@@ -16,11 +16,11 @@ steps:
       - '-c'
       - |
         echo "Uploading files to GCS bucket..."
-        gsutil -m cp -r repo/<your-folder-or-file> ${_BUCKET_PATH}
+        gsutil -m cp -r repo/<gcs_to_bq_and_bq_operators.py> ${_BUCKET_PATH}
         echo "Upload complete."
 
 substitutions:
-  _BUCKET_PATH: gs://your-bucket-name/your-destination-folder
+  _BUCKET_PATH: gs://us-central1-composer1-1c4a17c9-bucket/dags
 
 options:
   logging: CLOUD_LOGGING_ONLY
