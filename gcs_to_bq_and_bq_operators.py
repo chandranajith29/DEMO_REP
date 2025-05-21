@@ -9,10 +9,11 @@ from airflow.contrib.operators.gcs_to_bq import GoogleCloudStorageToBigQueryOper
 
 # Custom Python logic for derriving data value
 yesterday = datetime.combine(datetime.today() - timedelta(1), datetime.min.time())
+Today = datetime.combine(datetime.today())
 
 # Default arguments
 default_args = {
-    'start_date':yesterday,
+    'start_date':Today,
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
