@@ -1,0 +1,26 @@
+steps:
+  # Step 1: Clone GitHub repo
+  - name: 'gcr.io/cloud-builders/git'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        git clone https://github.com/<your-org-or-username>/<your-repo>.git repo
+        cd repo
+        echo "Repository cloned successfully."
+
+  # Step 2: Copy desired files to GCS bucket
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "Uploading files to GCS bucket..."
+        gsutil -m cp -r repo/<your-folder-or-file> ${_BUCKET_PATH}
+        echo "Upload complete."
+
+substitutions:
+  _BUCKET_PATH: gs://your-bucket-name/your-destination-folder
+
+options:
+  logging: CLOUD_LOGGING_ONLY
