@@ -41,7 +41,7 @@ from google.cloud import storage
 import pandas as pd
 
 
-from custom_operators.BigQueryDataCheckOperator import BigQueryDataCheckOperator
+
 
 dags_folder = conf.get("core", "dags_folder")
 artifacts_folder = Variable.get("artifacts_path")
@@ -527,43 +527,7 @@ def create_dag(**kwargs):
             REFRESH_SNOWFLAKE_STAGE = f""" LIST @{SNOWFLAKE_DATABASE}.{SNOWFLAKE_SCHEMA}.{SNOWFLAKE_STAGE_NAME}/{SNOWFLAKE_FOLDER_PATH}/; """
 
 
-            snowflake_create_staging_table = SnowflakeOperator(
-                task_id="snowflake_create_staging_table",
-                snowflake_conn_id=SNOWFLAKE_CONN_ID,
-                sql=CREATE_STAGING_TABLE_SQL,
-            )
-
-            snowflake_refresh_stage = SnowflakeOperator(
-                task_id="snowflake_refresh_stage",
-                snowflake_conn_id=SNOWFLAKE_CONN_ID,
-                sql=REFRESH_SNOWFLAKE_STAGE,
-            )
-
-            snowflake_staging = SnowflakeOperator(
-                task_id="load_to_snowflake_staging_table",
-                snowflake_conn_id=SNOWFLAKE_CONN_ID,
-                sql=COPY_INTO_STAGING_SQL_FILE,
-            )
-
-            snowflake_main = SnowflakeOperator(
-                task_id="load_to_snowflake_main_table",
-                sql=MERGE_INTO_MAIN_SQL_FILE,
-                snowflake_conn_id=SNOWFLAKE_CONN_ID,
-            )
-
-            snowflake_aggregation_tasks = []
-            for agg_name, agg_sql in SNOWFLAKE_AGGREGATION_SQLS.items():
-                snowflake_aggregation_tasks.append(SnowflakeOperator(
-                    task_id=f"load_to_snowflake_{agg_name}_agg_table",
-                    sql=f"{sql_path}/{agg_sql}",
-                    snowflake_conn_id=SNOWFLAKE_CONN_ID,
-                ))
-
-            snowflake_drop_staging_table = SnowflakeOperator(
-                task_id="snowflake_drop_staging_table",
-                snowflake_conn_id=SNOWFLAKE_CONN_ID,
-                sql=DROP_STAGING_SQL,
-            )
+            
 
         # snowflake integration end
         # -------------------------------------------------------------------------------------------------------------
@@ -629,32 +593,9 @@ def create_dag(**kwargs):
                 aggregation_complete = [load_to_pds_table]
 
             # Snowflake flow if activated
-            if snowflake_active:
-                aggregation_complete >> snowflake_create_staging_table >> snowflake_refresh_stage >> snowflake_staging >> snowflake_main
-                monitored_tasks.extend([
-                    snowflake_create_staging_table,
-                    snowflake_refresh_stage,
-                    snowflake_staging,
-                    snowflake_main,
-                    snowflake_drop_staging_table
-                ])
+            
 
-                if snowflake_aggregation_tasks:
-                    snowflake_main >> [task for task in snowflake_aggregation_tasks] >> snowflake_drop_staging_table
-                    monitored_tasks.extend(snowflake_aggregation_tasks)
-                    snowflake_flow_complete = snowflake_drop_staging_table
-                else:
-                    snowflake_main >> snowflake_drop_staging_table
-                    snowflake_flow_complete = snowflake_drop_staging_table
-            else:
-                snowflake_flow_complete = aggregation_complete
-
-            check_status = check_and_move_file(monitored_task_ids=[t.task_id for t in monitored_tasks])
-            for t in monitored_tasks:
-                t >> check_status
-
-            snowflake_flow_complete >> check_status
-            check_status >> [move_file_to_error_folder,move_file_to_archive_folder]
+            
 
             move_file_to_archive_folder >> end
             move_file_to_error_folder >> end
