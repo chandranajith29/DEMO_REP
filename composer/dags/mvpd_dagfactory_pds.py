@@ -54,22 +54,6 @@ sql_path = f"sql_files/pds"
 CHECKS_SQL_PATH = "sql_files/data_check"
 schema_path = f"{artifacts_folder}/table_schema"
 
-if os.environ.get("ENVIRONMENT") == "dev":
-    alert_email_list = ["mohamed.soliman@groupm.com", "oussama.errabia@groupm.com", "shikha.madnani@groupm.com",
-                        "evaristo.moreira@groupm.com", "radhika.ayyapusetty@groupm.com", "jayakumar.pp@groupm.com",
-                        "kelvin.oyanna@groupm.com",
-                        "shivam.soni@groupm.com", "ali.ashfaq@groupm.com"]
-
-elif os.environ.get("ENVIRONMENT") == "prod":
-    alert_email_list = ["mohamed.soliman@groupm.com","oussama.errabia@groupm.com","shikha.madnani@groupm.com",
-                        "evaristo.moreira@groupm.com", "radhika.ayyapusetty@groupm.com", "jayakumar.pp@groupm.com",
-                        "kelvin.oyanna@groupm.com",
-                        "shivam.soni@groupm.com", "ali.ashfaq@groupm.com",
-                        "Jacinda.Soto@groupm.com", "frances.zhen@groupm.com", "jia.zhou@groupm.com",
-                        "emily.lai@groupm.com",
-                        "dennis.stein@groupm.com", "colleen.lloyd@groupm.com", "nishant.desai@groupm.com"]
-else:
-    alert_email_list =["oussama.errabia@groupm.com"]
 
 
 
