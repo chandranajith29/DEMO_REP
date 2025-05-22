@@ -13,7 +13,7 @@ Today = datetime.combine(datetime.today())
 
 # Default arguments
 default_args = {
-    'start_date':yesterday,
+    'start_date':Today,
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
