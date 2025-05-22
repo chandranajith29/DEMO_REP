@@ -10,8 +10,7 @@ INSERT INTO
     insertion_order,
     edi_order_number,
     impressions,
-    bq_insertion_time,
-    file_name )
+    bq_insertion_time)
 SELECT
     advertiser,
     dma,
@@ -24,8 +23,7 @@ SELECT
     insertion_order,
     cast(edi_order_number as INTEGER),
     impressions,
-  CURRENT_TIMESTAMP() AS bq_insertion_time,
-  ARRAY_REVERSE(SPLIT(_FILE_NAME, '/'))[SAFE_OFFSET(0)] AS file_name
+  CURRENT_TIMESTAMP() AS bq_insertion_time
 FROM
   mvpd_data.mvpd_spectrum_stg
  ;
