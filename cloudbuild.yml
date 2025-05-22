@@ -55,7 +55,7 @@ steps:
 
 
 
-        gsutil cp composer/dags/table_config.yml "${_BUCKET_PATH}/dags/table_config.yml"
+        gsutil cp composer/dags/table_config.yaml "${_BUCKET_PATH}/dags/table_config.yaml"
 
 
 
