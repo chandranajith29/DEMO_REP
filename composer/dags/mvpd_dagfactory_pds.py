@@ -40,7 +40,7 @@ import logging
 from google.cloud import storage
 import pandas as pd
 
-from custom_sensors.GCSPatternFileCountSensor import GCSPatternFileCountSensor
+
 from custom_operators.BigQueryDataCheckOperator import BigQueryDataCheckOperator
 
 dags_folder = conf.get("core", "dags_folder")
