@@ -11,16 +11,68 @@ steps:
 
   # Step 2: Copy desired files to GCS bucket
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy Artifacts and DAGs'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        echo "Uploading files to GCS bucket..."
-        gsutil -m cp -r repo/gcs_to_bq_and_bq_operators.py ${_BUCKET_PATH}
-        echo "Upload complete."
+
+
+
+        # Print the environment
+
+
+
+       
+
+
+
+        # Deploy artifact folder
+
+
+
+        gsutil -m cp artifacts/sql_files/pds/* "${_BUCKET_PATH}/data/artifacts/sql_files/pds/"
+
+
+
+        # Deploy pds folder
+
+        
+
+        gsutil -m cp -r artifacts/sql_files/pds/* "${_BUCKET_PATH}/dags/sql_files/pds/"
+
+
+
+        # Deploy data_check folder
+
+
+
+        gsutil -m cp -r artifacts/sql_files/data_check/* "${_BUCKET_PATH}/dags/sql_files/data_check/"
+
+        
+
+        # Deploy YAML configuration file
+
+
+
+        gsutil cp composer/dags/mvpd_dagfactory_config.yaml "${_BUCKET_PATH}/dags/mvpd_dagfactory_config.yaml"
+
+
+
+        # Deploy Python file
+
+
+
+        gsutil cp composer/dags/mvpd_dagfactory_pds.py "${_BUCKET_PATH}/dags/mvpd_dagfactory_pds.py"
+
+
+
+        echo "Deployment completed successfully."
 
 substitutions:
-  _BUCKET_PATH: gs://us-central1-composer1-1c4a17c9-bucket/dags
+  _BUCKET_PATH: gs://us-central1-composer1-1c4a17c9-bucket
+
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
