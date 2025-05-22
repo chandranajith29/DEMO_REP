@@ -2,7 +2,7 @@ dataset: mvpd_data
 staging_table: mvpd_spectrum_stg
 main_table: mvpd_spectrum 
 gcs_bucket: data_eng_demos_0
-gcs_file_path: data_eng_demos_0/spec.csv
+gcs_file_path: spec.csv
 schema:
   - name: advertiser 
     type: STRING
