@@ -11,8 +11,6 @@ INSERT INTO
     edi_order_number,
     impressions,
     bq_insertion_time,
-    dag_id,
-    dag_run_id,
     file_name )
 SELECT
     advertiser,
