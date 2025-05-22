@@ -55,7 +55,7 @@ steps:
 
 
 
-        gsutil cp composer/dags/mvpd_dagfactory_config.yaml "${_BUCKET_PATH}/dags/mvpd_dagfactory_config.yaml"
+        gsutil cp composer/dags/table_config.yml "${_BUCKET_PATH}/dags/table_config.yml"
 
 
 
