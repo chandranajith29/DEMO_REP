@@ -1,0 +1,30 @@
+dataset: mvpd_data
+staging_table: mvpd_spectrum_stg
+main_table: mvpd_spectrum 
+gcs_bucket: data_eng_demos_0
+gcs_file_path: data_eng_demos_0/spec.csv
+schema:
+  - name: advertiser 
+    type: STRING
+  - name: dma
+    type: STRING
+  - name: dma_code
+    type: INTEGER
+  - name: hour
+    type: STRING
+  - name: date
+    type: DATE
+  - name: daypart
+    type: STRING
+  - name: day_of_week
+    type: STRING
+  - name: network
+    type: STRING
+  - name: insertion_order
+    type: STRING 
+  - name: edi_order_number
+    type: INTEGER 
+  - name: impressions
+    type: INTEGER                 
+
+write_disposition: WRITE_TRUNCATE

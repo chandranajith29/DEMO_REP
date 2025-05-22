@@ -65,6 +65,8 @@ steps:
 
         gsutil cp composer/dags/mvpd_dagfactory_pds.py "${_BUCKET_PATH}/dags/mvpd_dagfactory_pds.py"
 
+        gsutil cp composer/dags/sql/load_to_main.sql "${_BUCKET_PATH}/dags/sql/load_to_main.sql"
+
 
 
         echo "Deployment completed successfully."
