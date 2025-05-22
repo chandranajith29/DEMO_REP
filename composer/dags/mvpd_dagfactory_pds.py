@@ -11,7 +11,7 @@ def load_config(config_path: str) -> dict:
     with open(config_path, 'r') as f:
         return yaml.safe_load(f)
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'table_config.yml')
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'table_config.yaml')
 CONFIG = load_config(CONFIG_PATH)
 
 PROJECT_ID = os.environ.get('GCP_PROJECT_ID', 'deep-chimera-459105-q6')
