@@ -26,7 +26,8 @@ from airflow.models.param import Param
 from airflow.operators.weekday import BranchDayOfWeekOperator
 from airflow.exceptions import AirflowSkipException
 from fnmatch import fnmatchcase
-from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
+from airflow.providers.snowflake.operators.snowflake import SnowflakeSqlOperator
+
 
 
 from airflow.utils.state import State
