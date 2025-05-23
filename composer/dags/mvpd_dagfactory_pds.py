@@ -10,7 +10,7 @@ from datetime import timedelta
 def load_config(config_path: str) -> dict:
     with open(config_path, 'r') as f:
         return yaml.safe_load(f)
-
+#to get config path
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'table_config.yaml')
 CONFIG = load_config(CONFIG_PATH)
 
